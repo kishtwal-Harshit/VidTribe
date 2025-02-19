@@ -12,7 +12,7 @@ const getPublicKey = (url)=>{
 }
 
 const getAllVideos = asyncHandler(async (req, res) => {
-    const { page = 1, limit = 10, query, sortBy, sortType=1, userId } = req.query
+    const { page = 1, limit = 10, query, sortBy, sortType="asc", userId } = req.query
     //TODO: get all videos based on query, sort, pagination
 
     if(!userId || !query || !sortBy) throw new ApiErrors(400,"user id , query and sortBy are required")
