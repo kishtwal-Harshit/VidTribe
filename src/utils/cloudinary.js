@@ -17,6 +17,19 @@ const uploadOnCloudinary = async (localFilePath)=>{
       return null
   }
 }
+
+const deleteFromCloudinary = async(publicId)=>{
+
+   try{
+      if(!publicId) return null
+      const response = await cloudinary.uploader.destroy(publicId)
+      return response
+   }
+   catch(err){
+    console.log(err)
+    return null
+   }
+}
 cloudinary.config({ 
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
     api_key: process.env.CLOUDINARY_API_KEY, 

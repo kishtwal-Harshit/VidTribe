@@ -481,7 +481,7 @@ const deleteAccount = asyncHandler(async(req,res)=>{
    })
 
    return res.status(200)
-   .json(new ApiResponse(200,{},"account deactivated sucessfully"))
+   .json(new ApiResponse(200,{},"account deleted sucessfully"))
 })
 
 export { registerUser, loginUser, logoutUser, refreshAccessToken, changeCurrentPassword, updateAccountDetails, getCurrentUser, updateUserAvatar, updateUserCoverImage,getUserChannelProfile, getWatchHistory, deleteAccount };
