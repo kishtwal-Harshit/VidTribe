@@ -402,86 +402,9 @@ const getWatchHistory = asyncHandler(async(req,res)=>{
     ])
 
     return res.status(200)
-              .json(new ApiResponse(200,user[0].watchHistory,"Watch History fetced sucefffully!"))
+              .json(new ApiResponse(200,user[0].watchHistory,"Watch History fetced successfully!"))
 })
 
-const deleteAccount = asyncHandler(async(req,res)=>{
-
-   const user = await User.findById(req.user?._id)
-   const userName = user?.username
-   const userToBeDeleted = await User.aggregate([
-    {
-      $match: {
-        username: userName
-      }
-    },
-    {
-      $lookup: {
-        from: "subscriptions",
-        localField: "_id",
-        foreignField: "channel",
-        as: "subscribers"
-      }
-    },
-    {
-      $lookup: {
-        from: "subscriptions",
-        localField: "_id",
-        foreignField: "subscriber",
-        as: "subscribedTo"
-      }
-    }
-   ])
-
-   const subscribers = userToBeDeleted[0]?.subscribers || []
-
-   const subscriberIds = subscribers.map((sub)=>sub._id)
-
-   const channels = userToBeDeleted[0]?.channels || []
-
-   const channelIds = channels.map((channel)=>channel._id)
 
 
-   await Subscription.deleteMany({
-    _id: {$in : subscriberIds}
-   })
-   
-   await Subscription.deleteMany({
-      _id: {$in: channelIds}
-  })
-
-   
-   const videosToBeDeleted = await User.aggregate([
-
-      {
-        $match: {
-          _id: new mongoose.Types.ObjectId(req.user._id)
-        }
-      },
-      {
-        $lookup: {
-          from: "videos",
-          localField: "_id",
-          foreignField: "owner",
-          as: "userVideos"
-        }
-      }
-   ])
-
-   const videos = videosToBeDeleted[0]?.userVideos || [];
-
-   const videoIds = videos.map((vid)=>vid?._id)
-
-   await Video.deleteMany({
-    _id : {$in : videoIds}
-   })
-
-   await User.deleteOne({
-    username: userName
-   })
-
-   return res.status(200)
-   .json(new ApiResponse(200,{},"account deleted sucessfully"))
-})
-
-export { registerUser, loginUser, logoutUser, refreshAccessToken, changeCurrentPassword, updateAccountDetails, getCurrentUser, updateUserAvatar, updateUserCoverImage,getUserChannelProfile, getWatchHistory, deleteAccount };
+export { registerUser, loginUser, logoutUser, refreshAccessToken, changeCurrentPassword, updateAccountDetails, getCurrentUser, updateUserAvatar, updateUserCoverImage,getUserChannelProfile, getWatchHistory};
