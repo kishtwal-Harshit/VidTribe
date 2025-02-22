@@ -185,11 +185,14 @@ const togglePublishStatus = asyncHandler(async (req, res) => {
     const { videoId } = req.params
 
     if(!videoId) throw new ApiErrors(400,"Video id is required")
+    const previousState = await Video.findById(videoId).select("isPublished")
 
     const video = await Video.findByIdAndUpdate(
         videoId,
         {
-            isPublished: !video.isPublished
+            $set: {
+                isPublished: 1-previousState.isPublished
+            }
         },
         {
             new: true

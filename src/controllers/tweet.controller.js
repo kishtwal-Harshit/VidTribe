@@ -24,7 +24,7 @@ const createTweet = asyncHandler(async (req, res) => {
     if(!tweetCreated) throw new ApiErrors(500,"Something went wrong while creating the tweet")
 
     return res.status(200)
-    .json(new ApiResponse(200,{tweetCreated},"tweet created sucessfully!"))
+    .json(new ApiResponse(200,{tweetCreated},"tweet created successfully!"))
 
 
 })
@@ -39,7 +39,7 @@ const getUserTweets = asyncHandler(async (req, res) => {
     if(userTweets.length===0) throw new ApiErrors(501,"Somethig went wrong while fetching tweets")
 
     res.status(200)
-    .json(new ApiResponse(200,{userTweets},"User Tweets fetched Sucessfully!"))
+    .json(new ApiResponse(200,{userTweets},"User Tweets fetched successfully!"))
    
 
 })
@@ -65,7 +65,7 @@ const updateTweet = asyncHandler(async (req, res) => {
     )
 
     res.status(200).
-    json(new ApiResponse(200,{tweetToBeUpdated},"Tweet updated sucessfully!"))
+    json(new ApiResponse(200,{tweetToBeUpdated},"Tweet updated successfully!"))
 })
 
 const getTweetScore = asyncHandler(async (req, res) => {
@@ -83,7 +83,7 @@ const getTweetScore = asyncHandler(async (req, res) => {
 const deleteTweet = asyncHandler(async (req, res) => {
     //TODO: delete tweet
 
-    const {tweetId} = req.body
+    const {tweetId} = req.params
 
     if(!tweetId) throw new ApiErrors(400,"Tweet id required!")
 
@@ -92,7 +92,7 @@ const deleteTweet = asyncHandler(async (req, res) => {
     if(!tweetToBeDeleted) throw new ApiErrors(404,"No tweet with this id found")
 
     res.status(200).
-    json(new ApiResponse(200,{},"tweet deleted sucessfully!"))
+    json(new ApiResponse(200,{},"tweet deleted successfully!"))
 })
 
 export {
