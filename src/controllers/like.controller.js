@@ -7,7 +7,6 @@ import {asyncHandler} from "../utils/asyncHandler.js"
 
 const toggleVideoLike = asyncHandler(async (req, res) => {
     const {videoId} = req.params
-    //TODO: toggle like on video
     
     if(!videoId) throw new ApiErrors(400,"video id is required")
     
@@ -32,7 +31,6 @@ else{
 
 const toggleCommentLike = asyncHandler(async (req, res) => {
     const {commentId} = req.params
-    //TODO: toggle like on comment
 
     if(!commentId) throw new ApiErrors(400,"comment id is required")
 
@@ -56,7 +54,7 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
 
 const toggleTweetLike = asyncHandler(async (req, res) => {
     const {tweetId} = req.params
-    //TODO: toggle like on tweet
+    
     if(!tweetId) throw new ApiErrors(400,"tweet id is required")
 
         const isLiked = await Like.findOne({tweet: tweetId, likedBy: req.user?._id})
@@ -79,8 +77,7 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
 )
 
 const getLikedVideos = asyncHandler(async (req, res) => {
-    //TODO: get all liked videos
-
+    
     const likedVideos = await Like.find({likedBy: req.user?._id}).select("video")
 
     if(likedVideos.length===0) throw new ApiErrors(400,"user has not liked any videos")

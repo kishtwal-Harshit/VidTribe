@@ -8,7 +8,6 @@ import {asyncHandler} from "../utils/asyncHandler.js"
 const createPlaylist = asyncHandler(async (req, res) => {
     const {name, description} = req.body
 
-    //TODO: create playlist
     if(!name || !description) throw new ApiErrors(400,"Name and description are required")
     
     const userId = req.user?._id
@@ -29,7 +28,6 @@ const createPlaylist = asyncHandler(async (req, res) => {
 
 const getUserPlaylists = asyncHandler(async (req, res) => {
     const {userId} = req.params
-    //TODO: get user playlists
 
     if(!userId) throw new ApiErrors(400,"User id is required")
     
@@ -43,7 +41,6 @@ const getUserPlaylists = asyncHandler(async (req, res) => {
 
 const getPlaylistById = asyncHandler(async (req, res) => {
     const {playlistId} = req.params
-    //TODO: get playlist by id
 
     if(!playlistId) throw new ApiErrors(400,"playlist id is required")
     
@@ -78,7 +75,6 @@ const addVideoToPlaylist = asyncHandler(async (req, res) => {
 
 const removeVideoFromPlaylist = asyncHandler(async (req, res) => {
     const {playlistId, videoId} = req.params
-    // TODO: remove video from playlist
 
     if(!playlistId || !videoId) throw new ApiErrors(400,"Playlist id and video id are required")
     
@@ -101,7 +97,6 @@ const removeVideoFromPlaylist = asyncHandler(async (req, res) => {
 
 const deletePlaylist = asyncHandler(async (req, res) => {
     const {playlistId} = req.params
-    // TODO: delete playlist
 
     if(!playlistId) throw new ApiErrors(400,"playlist id is required")
 
@@ -116,7 +111,6 @@ const deletePlaylist = asyncHandler(async (req, res) => {
 const updatePlaylist = asyncHandler(async (req, res) => {
     const {playlistId} = req.params
     const {name, description} = req.body
-    //TODO: update playlist
 
     if(!playlistId) throw new ApiErrors(400,"playlist id is required")
     if(!name || !description) throw new ApiErrors(400,"new name and description required")

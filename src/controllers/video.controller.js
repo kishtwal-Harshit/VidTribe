@@ -13,7 +13,6 @@ const getPublicKey = (url)=>{
 
 const getAllVideos = asyncHandler(async (req, res) => {
     const { page = 1, limit = 10, query, sortBy, sortType="asc", userId } = req.query
-    //TODO: get all videos based on query, sort, pagination
 
     if(!userId || !query || !sortBy) throw new ApiErrors(400,"user id , query and sortBy are required")
     
@@ -70,7 +69,6 @@ const getAllVideos = asyncHandler(async (req, res) => {
 
 const publishAVideo = asyncHandler(async (req, res) => {
     const { title, description} = req.body
-    // TODO: get video, upload to cloudinary, create video
 
     if(!title || !description) throw new ApiErrors(400,"Title or Description not provided!")
     
@@ -105,7 +103,7 @@ const publishAVideo = asyncHandler(async (req, res) => {
 
 const getVideoById = asyncHandler(async (req, res) => {
     const { videoId } = req.params
-    //TODO: get video by id
+   
     
     const requiredVideo = await Video.findById(videoId).select("-owner -isPublished")
 
@@ -117,7 +115,6 @@ const getVideoById = asyncHandler(async (req, res) => {
 
 const updateVideo = asyncHandler(async (req, res) => {
     const { videoId } = req.params
-    //TODO: update video details like title, description, thumbnail
 
     const { title, description} = req.body
 
@@ -154,7 +151,6 @@ const updateVideo = asyncHandler(async (req, res) => {
 
 const deleteVideo = asyncHandler(async (req, res) => {
     const { videoId } = req.params
-    //TODO: delete video
     if(!videoId) throw new ApiErrors(400,"Video id is required")
 
     const toDelete = await Video.findById(videoId).select("videoFile thumbnail")
